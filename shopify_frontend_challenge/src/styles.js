@@ -31,5 +31,14 @@ export const styles = {
             "background-color": "rgb(241, 250, 238)",
             "color": "rgb(29, 53, 87)",
         }
+    },
+    top_bar: {
+        "margin-top": "20px",
+        "display": "flex",
+        "justify-content": "space-between" 
+    },
+    dropdown: {
+        "width": "fit-content",
+        "background-color": "rgb(241, 250, 238)",
     }
 }
