@@ -1,14 +1,21 @@
-import { Form, Container, Button } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useState } from 'react'
-
-
-function Response ({prompt, response}) {
+import injectSheet from "react-jss"
+import {styles} from "./styles"
+                
+const Response = injectSheet(styles)(({classes, prompt, response}) => {
   return (
-    <Container className='border border-dark mt-3 p-3'>
-        <p>Prompt: {prompt}</p>
-        <p>Response: {response}</p>
+    <Container className={classes.response_box}>
+        <Row>
+            <Col md={3} className={classes.title_column}>Prompt</Col>
+            <Col>{prompt}</Col>
+        </Row>
+        <Row>
+            <Col md={3} className={classes.title_column}>Response</Col>
+            <Col>{response}</Col>
+        </Row>
     </Container>
   )
-}
+})
 
 export default Response
