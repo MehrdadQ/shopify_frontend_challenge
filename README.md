@@ -1,4 +1,4 @@
-## [Shopify Frontend Developer Intern Challenge](https://mehrdadq.github.io/shopify_frontend_challenge/)
+## [Shopify Frontend Developer Intern Challenge](https://mehrdadq.github.io/shopify_frontend_challenge_deployment/)
 
 ### Created using OpenAI's powerful AI model called GPT-3, React, and CSS.
 
