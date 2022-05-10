@@ -1,13 +1,44 @@
-import { Form, Container, Button } from 'react-bootstrap';
-import { useState } from 'react'
+import { Form, Container, Button } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
 import Response from "./Components/response.js"
 
 import injectSheet from "react-jss"
 import {styles} from "./styles"
 
+// modes: free, joke, fact, poem, restaurant review
+
+function save_to_local_storage(response) {
+  let responses
+  if (localStorage.getItem("responses") === null) {
+    responses = []
+  } else {
+    responses = JSON.parse(localStorage.getItem("responses"))
+  }
+  responses.unshift(response)
+  localStorage.setItem("responses", JSON.stringify(responses))
+}
+
+function get_from_local_storage() {
+  let responses
+  if (localStorage.getItem("responses") === null) {
+    responses = []
+  } else {
+    responses = JSON.parse(localStorage.getItem("responses"))
+  }
+  return responses
+}
+
 const App = injectSheet(styles)(({classes}) => {
   const [input, set_input] = useState("")
   const [responses, set_responses] = useState([])
+
+  // useEffect(() => {
+  //   set_responses(get_from_local_storage())
+  // }, [])
+
+  useEffect(() => {
+    set_responses(get_from_local_storage())
+}, [])
 
   return (
     <div className={classes.container}>
@@ -43,20 +74,20 @@ const App = injectSheet(styles)(({classes}) => {
               body: JSON.stringify(data),
             }).then(response => response.json())
             .then(data => {
-              console.log(data)
-              set_responses([...responses, {prompt: input, response: data.choices[0].text}])
-            });
+              save_to_local_storage({prompt: input, response: data.choices[0].text})
+              set_responses(get_from_local_storage())
+            })
           }}  
         >Submit</button>
       </Container>
       <Container className='mt-5'>
-        {responses.length > 0 ? <h2>Responses</h2> : <h2 className='text-center'>No responses yet</h2>}
-        {responses.map((item) => {
-          return <Response prompt={item.prompt} response={item.response}/>
+        {responses.length > 0 ? <h2>Responses</h2> : <h2 className='text-center'>Try entering a prompt in the textbox above</h2>}
+        {responses.map((item, index) => {
+          return <Response key={`response_${index}`} prompt={item.prompt} response={item.response}/>
         })}
       </Container>
     </div>
   )
 })
 
-export default App;
+export default App

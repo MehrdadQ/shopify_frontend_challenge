@@ -1,5 +1,4 @@
-import { Col, Container, Row } from 'react-bootstrap';
-import { useState } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 import injectSheet from "react-jss"
 import {styles} from "./styles"
                 
@@ -12,7 +11,8 @@ const Response = injectSheet(styles)(({classes, prompt, response}) => {
         </Row>
         <Row>
             <Col md={3} className={classes.title_column}>Response</Col>
-            <Col>{response}</Col>
+            {/* remove newline characters from beginning and end of response */}
+            <Col>{response.replace(/^\s+|\s+$/g, '')}</Col>
         </Row>
     </Container>
   )

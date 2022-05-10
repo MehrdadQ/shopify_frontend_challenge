@@ -10,7 +10,10 @@ export const styles = {
     },
     input_box: {
         "background-color": "rgb(241, 250, 238)",
-        "height": "150px"
+        "height": "150px",
+        '&:focus': {
+            "background-color": "rgb(241, 250, 238)"
+        }
     },
     button: {
         "float": "right",
